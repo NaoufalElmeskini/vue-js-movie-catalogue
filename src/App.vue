@@ -7,9 +7,17 @@
 
 <script>
 import Header from "./components/Header.vue";
+import Movie from "./models/movie";
+import movieApi from "./api/index";
 export default {
   components: {
     Header,
+  },
+  created() {
+    movieApi.getAll().then((res) => {
+      const movies = res.data.movies.map((m) => new Movie(m));
+      this.$store.dispatch("setMovies", movies);
+    });
   },
 };
 </script>

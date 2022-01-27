@@ -5,7 +5,6 @@
 </template>
 
 <script>
-import movieApi from "../api/index";
 import Category from "../components/Category.vue";
 import Movie from "../models/movie";
 
@@ -13,11 +12,12 @@ export default {
   components: { Category },
   name: "Home",
   data() {
-    return {
-      movies: [],
-    };
+    return {};
   },
   computed: {
+    movies() {
+      return this.$store.getters.getMovies;
+    },
     categories() {
       return this.movies.reduce((categories, movie) => {
         movie.genres.forEach((genre) => {
@@ -31,11 +31,6 @@ export default {
         return categories;
       }, []);
     },
-  },
-  created() {
-    movieApi.getAll().then((res) => {
-      this.movies = res.data.movies.map((m) => new Movie(m));
-    });
   },
 };
 </script>

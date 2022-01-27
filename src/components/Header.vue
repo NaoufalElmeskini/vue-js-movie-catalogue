@@ -1,13 +1,41 @@
 <template>
   <div class="header">
     <div class="logo">wookie movies</div>
-    <div class="search"></div>
+    <div class="search">
+      <input type="text" v-model="searchText" />
+      <ul v-show="searchText && searchResults.length">
+        <li v-for="m in searchResults" :key="m.id" @click="handleClick(m.id)">
+          {{ m.title }}
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
 <script>
+import movieApi from "../api/index";
+
 export default {
   name: "Header",
+  data() {
+    return {
+      searchText: "",
+      searchResults: [],
+    };
+  },
+  watch: {
+    searchText: function (text) {
+      movieApi.search(text).then((res) => {
+        this.searchResults = res.data.movies;
+      });
+    },
+  },
+  methods: {
+    handleClick(id) {
+      this.searchText = "";
+      this.$router.push({ name: "movie-details", params: { id } });
+    },
+  },
 };
 </script>
 
@@ -38,12 +66,19 @@ export default {
 
 .header .search input {
   width: 300px !important;
+  height: 28px;
 }
 
 .header .search ul {
   position: absolute;
-  top: 60px;
+  top: 25px;
   width: 100%;
   background: darkgray;
+  padding: 10px 0 0 15px;
+  list-style: none;
+}
+.header .search li {
+  height: 25px;
+  cursor: pointer;
 }
 </style>

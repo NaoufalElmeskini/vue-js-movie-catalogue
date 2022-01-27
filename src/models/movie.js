@@ -7,7 +7,10 @@ export default class Movie {
     this.title = data.title;
     this.overview = data.overview;
     this.imdbRating = data.imdb_rating;
-    this.director = data.director;
+    this.director =
+      typeof data.director === "string"
+        ? data.director
+        : data.director.join(", ");
     this.releasedDate = data.released_on;
     this.duration = data.length;
     this.cast = data.cast;

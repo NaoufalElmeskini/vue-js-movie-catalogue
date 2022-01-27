@@ -1,13 +1,28 @@
 <template>
-  <div className="category">
-    <div className="title"></div>
-    <div className="category-movies"></div>
+  <div class="category">
+    <div class="title">{{ category.name }}</div>
+    <div class="category-movies">
+      <div
+        class="movie-tuile"
+        v-for="movie in category.movies"
+        :key="movie.id"
+        :style="{ backgroundImage: `url(${movie.backdrop})` }"
+      >
+        <div class="overlay"></div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
   name: "Category",
+  props: {
+    category: {
+      type: Object,
+      required: true,
+    },
+  },
 };
 </script>
 

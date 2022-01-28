@@ -1,5 +1,18 @@
-# movie-training
+# Wookie Movie - A movie catalogue app using Vue.js 
 
+**Features:**
+- Listing movie elements, organized by categorie (using a public movie API)
+- Searching a movie
+- Movie details page
+
+**Screenshots:**
+
+![img.png](resources/img.png)
+
+
+![img_1.png](resources/img_1.png)
+
+*** 
 ## Project setup
 ```
 yarn install

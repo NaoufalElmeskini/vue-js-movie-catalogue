@@ -12,7 +12,9 @@ const movieApi = {
   },
 
   search(text) {
-    return axios.get();
+    console.log('searching movie: ' + text);
+    console.log(text);
+    return axios.get("/movies", { params: { q: text} });
   },
 };
 

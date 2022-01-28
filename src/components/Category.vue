@@ -7,6 +7,8 @@
         v-for="movie in category.movies"
         :key="movie.id"
         :style="{ backgroundImage: `url(${movie.backdrop})` }"
+
+        @click="handleClick(movie.id)"
       >
         <div class="overlay"></div>
       </div>
@@ -23,6 +25,13 @@ export default {
       required: true,
     },
   },
+  methods: {
+    handleClick: function(id) {
+      console.log('click triggered!');
+      console.log(id);
+      this.$router.push({name: "movie-details", params: { id }})
+    }
+  }
 };
 </script>
 

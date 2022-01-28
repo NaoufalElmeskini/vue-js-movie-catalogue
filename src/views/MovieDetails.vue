@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="movie-details">
-      <div class="movie-description"></div>
+      <div class="movie-description">{{movie}}</div>
     </div>
   </div>
 </template>
@@ -9,6 +9,11 @@
 <script>
 export default {
   name: "MovieDetails",
+  computed: {
+    movie() {
+      return this.$store.getters.getMovieById(this.$router.params.id);
+    }
+  }
 };
 </script>
 

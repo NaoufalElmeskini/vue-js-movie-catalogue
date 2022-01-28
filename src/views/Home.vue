@@ -1,5 +1,15 @@
 <template>
   <div class="home">
+    <div style="margin: 20px;">
+      <input v-model="searchText" type="text" placeholder="search" @keyup="handleKeyup">
+
+      <ul v-show="searchText && searchResult.length">
+        <li v-for="movie in searchResult" :key="movie.id" @click="handleClickMovieResult(movie.id)">
+          {{movie.title}}
+        </li>
+      </ul>
+    </div>
+
     <Category v-for="cat in categories" :key="cat.name" :category="cat" />
   </div>
 </template>
@@ -14,7 +24,9 @@ export default {
   name: "Home",
   data() {
     return {
+      searchText: '',
       movies: [],
+      searchResult: []
     };
   },
   computed: {
@@ -31,6 +43,20 @@ export default {
         return categories;
       }, []);
     },
+  },
+  methods: {
+    handleKeyup: function() {
+      movieApi.search(this.searchText).then((res) => {
+        this.searchResult = res.data.movies.map((m) => new Movie(m));
+      });
+
+      console.log('resultat: ');
+      console.log(this.searchResult);
+    },
+    handleClickMovieResult: function (id) {
+      console.log('search result clicked!');
+      console.log({id});
+    }
   },
   created() {
     movieApi.getAll().then((res) => {

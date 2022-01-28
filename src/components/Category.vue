@@ -8,8 +8,7 @@
         :key="movie.id"
         :style="{ backgroundImage: `url(${movie.backdrop})` }"
 
-        @click="handleClick(movie.id)"
-      >
+        @click="handleClick(movie.id)">
         <div class="overlay"></div>
       </div>
     </div>

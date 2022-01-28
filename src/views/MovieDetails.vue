@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <div class="movie-details">
+      <p>Hello from movie details!</p>
       <div class="movie-description">{{movie}}</div>
     </div>
   </div>
@@ -11,7 +12,9 @@ export default {
   name: "MovieDetails",
   computed: {
     movie() {
-      return this.$store.getters.getMovieById(this.$router.params.id);
+      console.log('router.params.id: ');
+      console.log(this.$route.params.id);
+      return this.$store.getters.getMovieById(this.$route.params.id);
     }
   }
 };
